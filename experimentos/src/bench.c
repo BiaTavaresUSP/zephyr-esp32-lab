@@ -97,27 +97,29 @@ int app_led_toggle(void)
     return ret;
 }
 /* Tratamento do evento: identico nas quatro arquiteturas */
-void app_process_event(void) {
-	uint32_t t0 = k_cycle_get_32();
+void app_process_event(void)
+{
+    uint32_t t0 = k_cycle_get_32();
 
-	atomic_inc(&ev_processed);
+    atomic_inc(&ev_processed);
 
-	if (app_led_toggle() < 0) {
- 	    printk("ERRO: falha ao atualizar o LED RGB\n");
-	}
+    if (CONFIG_APP_PROCESSING_US > 0) {
+        k_busy_wait(CONFIG_APP_PROCESSING_US);
+    }
 
-	if (CONFIG_APP_PROCESSING_US > 0) {
-		k_busy_wait(CONFIG_APP_PROCESSING_US); /* carga de CPU */
-	}
+#ifdef CONFIG_APP_VERBOSE
+    printk("evento processado #%ld\n",
+           (long)atomic_get(&ev_processed));
+#endif
+
+    if (measuring) {
+        lat_add(&lat_proc_dur, k_cycle_get_32() - t0);
+    }
+}
 
 #ifdef CONFIG_APP_VERBOSE
 	printk("evento processado #%ld\n", (long)atomic_get(&ev_processed));
 #endif
-
-	if (measuring) {
-		lat_add(&lat_proc_dur, k_cycle_get_32() - t0);
-	}
-}
 
 #ifdef CONFIG_APP_HEARTBEAT
 
