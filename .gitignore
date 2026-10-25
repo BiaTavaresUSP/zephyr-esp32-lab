@@ -1,0 +1,28 @@
+# Zephyr e arquivos de compilação
+build/
+build-*/
+.cache/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+
+# Ambientes Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Editores
+.vscode/
+.idea/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Backups locais
+*.bak
+*.backup
+*.orig
+*~

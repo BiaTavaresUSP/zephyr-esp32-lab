@@ -1,0 +1,15 @@
+/* Configuração da UART e pinos do hands-on */
+#include <zephyr/dt-bindings/gpio/gpio.h>
+
+&uart0 {
+    status = "okay";
+};
+
+/ {
+    zephyr,user {
+        led-gpios = <&gpio0 2 GPIO_ACTIVE_HIGH>;
+        button-gpios = <&gpio0 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        stim-gpios = <&gpio0 18 GPIO_ACTIVE_LOW>;
+    };
+};
+
