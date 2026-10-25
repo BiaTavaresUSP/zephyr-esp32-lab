@@ -4,7 +4,6 @@
 
 #define ZU DT_PATH(zephyr_user)
 
-const struct device *rgb_strip = DEVICE_DT_GET(DT_ALIAS(led_strip));
 const struct gpio_dt_spec button = GPIO_DT_SPEC_GET(ZU, button_gpios);
 const struct gpio_dt_spec stim = GPIO_DT_SPEC_GET(ZU, stim_gpios);
 
@@ -122,11 +121,10 @@ static void run_benchmark(void) {
 int main(void) {
 	k_thread_priority_set(k_current_get(), CONFIG_APP_MAIN_PRIORITY);
 
-	if (!device_is_ready(rgb_strip) ||
-   	    !gpio_is_ready_dt(&button) ||
-   	    !gpio_is_ready_dt(&stim)) {
-   	    printk("ERRO: dispositivo nao esta pronto\n");
-   	    return 0;
+	if (!gpio_is_ready_dt(&button) ||
+ 	    !gpio_is_ready_dt(&stim)) {
+    	    printk("ERRO: dispositivo nao esta pronto\n");
+    	    return 0;
 	}
 
 	if (gpio_pin_configure_dt(&stim, GPIO_OUTPUT_INACTIVE) < 0 ||

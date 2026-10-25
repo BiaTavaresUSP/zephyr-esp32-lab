@@ -6,12 +6,10 @@
 
 #include <zephyr/device.h>
 #include <zephyr/drivers/gpio.h>
-#include <zephyr/drivers/led_strip.h>
 #include <zephyr/kernel.h>
 #include <zephyr/sys/atomic.h>
 
 /* LED RGB integrado e GPIOs do experimento */
-extern const struct device *rgb_strip;
 extern const struct gpio_dt_spec button;
 extern const struct gpio_dt_spec stim;
 
@@ -44,7 +42,6 @@ void lat_print(const char *name, const struct lat_stat *s);
 void bench_reset_all(void);
 
 void app_process_event(void);
-int app_led_toggle(void);
 
 void heartbeat_start(void);
 int mode_start(void);

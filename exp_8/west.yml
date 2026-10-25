@@ -1,0 +1,21 @@
+manifest:
+    remotes:
+        - name: zephyrproject-rtos
+          url-base: https://github.com/zephyrproject-rtos
+    projects:
+        - name: zephyr
+          remote: zephyrproject-rtos
+          revision: main
+          import:
+              name-allowlist:
+                  - littlefs
+                  - tinycrypt
+                  - tf-psa-crypto
+                  - mbedtls
+                  - thrift
+                  - nanopb
+                  - lvgl
+                  - zcbor
+                  - fatfs
+                  - hal_espressif
+                  - esptool
