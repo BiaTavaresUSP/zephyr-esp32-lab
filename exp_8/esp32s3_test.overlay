@@ -1,3 +1,4 @@
+#include <zephyr/dt-bindings/gpio/gpio.h>
 #include <zephyr/dt-bindings/led/led.h>
 #include <espressif/esp32s3/esp32s3_wroom_n16.dtsi>
 
@@ -17,6 +18,12 @@
 
     aliases {
         led-strip = &led_strip;
+    };
+
+    zephyr,user {
+        led-gpios = <&gpio0 2 GPIO_ACTIVE_HIGH>;
+        button-gpios = <&gpio0 4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        stim-gpios = <&gpio0 18 GPIO_ACTIVE_LOW>;
     };
 
     led_strip: ws2812 {

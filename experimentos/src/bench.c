@@ -61,41 +61,8 @@ void lat_print(const char *name, const struct lat_stat *s) {
 	printk("CSV,LAT,%s,%s,%u,%u,%u,%u\n", mode_name(), name, s->n, (uint32_t)mn,
 				 (uint32_t)av, (uint32_t)mx);
 }
+  
 
-int app_led_toggle(void)
-{
-    static int cor = 0;
-
-    struct led_rgb pixel = {0};
-
-    switch (cor) {
-    case 0:
-        pixel.r = 255;
-        pixel.g = 0;
-        pixel.b = 0;
-        break;
-
-    case 1:
-        pixel.r = 0;
-        pixel.g = 255;
-        pixel.b = 0;
-        break;
-
-    case 2:
-        pixel.r = 0;
-        pixel.g = 0;
-        pixel.b = 255;
-        break;
-    }
-
-    int ret = led_strip_update_rgb(rgb_strip, &pixel, 1);
-
-    if (ret == 0) {
-        cor = (cor + 1) % 3;
-    }
-
-    return ret;
-}
 /* Tratamento do evento: identico nas quatro arquiteturas */
 void app_process_event(void)
 {
